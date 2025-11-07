@@ -1,4 +1,4 @@
-# 🧠 Matter Gateway — Milestone 1
+# Matter Gateway — Milestone 1
 
 ### 🔹 Overview
 This repository contains the **base Matter Gateway implementation** and the **first virtual device (On/Off Lamp)**.  
@@ -6,7 +6,7 @@ It establishes the foundational architecture for simulating Matter-compliant sma
 
 ---
 
-## ⚙️ Milestone 1 Features
+## Milestone 1 Features
 
 | Component | Description |
 |------------|-------------|
@@ -18,7 +18,7 @@ It establishes the foundational architecture for simulating Matter-compliant sma
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 Matter_Gateway/
 ├── api/
 │ ├── init.py
@@ -38,10 +38,29 @@ Matter_Gateway/
 
 ---
 
-## 🚀 Setup & Run Instructions
+## Setup & Run Instructions
 
-### 1️⃣ Create Virtual Environment
+### Create Virtual Environment
 ```bash
 python -m venv venv
 source venv/bin/activate        # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
+
+# To the run the gateway
+python run_gateway.py
+
+--> Server starts at:
+ http://localhost:8000
+
+--> REST API Endpoints
+Method	Endpoint	Description
+GET	/devices	List all registered virtual devices
+GET	/devices/{name}	Read device state
+POST	/devices/{name}/{attribute}?value={bool}	Update device state
+
+
+--> Testing the On/Off Lamp
+curl http://localhost:8000/devices
+curl -X POST "http://localhost:8000/devices/LivingRoomLamp/power?value=true"
+curl http://localhost:8000/devices/LivingRoomLamp
+curl -X POST "http://localhost:8000/devices/LivingRoomLamp/power?value=false"
